@@ -1,4 +1,4 @@
-package com.mockito;
+package com.mock.ito;
 
 public class ClassTest {
     public final Database database;

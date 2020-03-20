@@ -1,5 +1,6 @@
-package com.mockito;
+package com.mockito.test;
 
+import com.mock.ito.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -7,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class MockitoTest {
@@ -25,4 +27,14 @@ public class MockitoTest {
         Assert.assertTrue(check);
     }
 
+    @Test
+    public void customer() {
+        Customer customer=new Customer("Susan","Ivanova");
+        EntityManagerDemo entityManager=mock(EntityManagerDemo.class);
+        when(entityManager.find(Customer.class,1L)).thenReturn(customer);
+        CustomerReader customerReader=new CustomerReader();
+        customerReader.setEntityManager(entityManager);
+        String fullName = customerReader.findFullName(1L);
+        Assert.assertEquals("Susan Ivanova",fullName);
+    }
 }
